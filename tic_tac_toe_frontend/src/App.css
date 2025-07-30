@@ -1,104 +1,249 @@
-/* CSS Variables for Theme Management */
+/* GENERAL THEME AND RESET BASES */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --bg: #fff;
+  --ttt-primary: #1565c0;
+  --ttt-secondary: #424242;
+  --ttt-accent: #ffb300;
+  --ttt-bg-card: #f7f8fa;
+  --ttt-border: #e9ecef;
+  --ttt-shadow: rgba(21,101,192,0.04);
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+body, html, #root, .App {
+  background: var(--bg);
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
 }
 
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
+.ttt-main-container {
+  width: 100vw;
   min-height: 100vh;
+  max-width: 400px;
+  margin: auto;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0 12px 36px 12px;
+}
+
+/* TOP AREA */
+.ttt-top-container {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.ttt-title {
+  font-size: 2.1rem;
+  letter-spacing: 1px;
+  font-weight: 800;
+  margin: 0 0 14px 0;
+  color: var(--ttt-primary);
+}
+
+.ttt-mode-row {
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.ttt-mode-label {
+  font-size: 1rem;
+  color: var(--ttt-secondary);
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.ttt-mode-select {
+  font-size: 1rem;
+  color: var(--ttt-primary);
+  border: 1.5px solid var(--ttt-border);
+  border-radius: 7px;
+  padding: 5px 18px 5px 10px;
+  background: #fff;
+  font-weight: bold;
+}
+.ttt-mode-select:focus {
+  outline: 2px solid var(--ttt-primary);
+}
+
+.ttt-status {
+  font-size: 1.18rem;
+  font-weight: 700;
+  margin: 12px 0 10px 0;
+  min-height: 1.7em;
+  letter-spacing: 1px;
+  color: var(--ttt-accent);
+}
+
+.ttt-scoreboard {
+  margin: 15px auto 0;
+  background: #f7f8fa;
+  border-radius: 10px;
+  border: 1.5px solid var(--ttt-border);
+  box-shadow: 0px 2px 12px 0px var(--ttt-shadow);
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
+  font-size: 1.07rem;
+  padding: 5px 0;
+  gap: 4px;
+  max-width: 270px;
+}
+
+.ttt-score {
+  padding: 0 2px;
+  font-weight: 500;
+}
+.ttt-x {
+  color: var(--ttt-primary);
+}
+.ttt-o {
+  color: var(--ttt-secondary);
+}
+.ttt-draw {
+  color: #888;
+}
+.ttt-divider {
+  color: #b0b3b9;
+}
+
+/* BOARD AREA */
+.ttt-board {
+  width: 100%;
+  max-width: 330px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  background: var(--ttt-bg-card);
+  border-radius: 18px;
+  border: 2px solid var(--ttt-border);
+  box-shadow: 0 2px 8px 0 var(--ttt-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
   position: relative;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.ttt-board-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex: 1 1 33.33%;
+  gap: 0;
 }
 
-.theme-toggle {
+.ttt-board-overlay {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+  left: 0; top: 0;
+  right: 0; bottom: 0;
+  background: rgba(255,255,255,0.55);
+  border-radius: 18px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* SQUARES */
+.ttt-square {
+  flex: 1 1 33.33%;
+  aspect-ratio: 1 / 1;
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  font-family: inherit;
+  background: transparent;
+  border: none;
+  border-right: 1.6px solid var(--ttt-border);
+  border-bottom: 1.6px solid var(--ttt-border);
+  color: var(--ttt-secondary);
+  font-weight: 800;
+  cursor: pointer;
+  outline: none !important;
+  transition: 
+    background 120ms, color 120ms, border-color 150ms;
+  will-change: color, background;
+  border-radius: 0;
+  position: relative;
+}
+
+.ttt-square:focus, .ttt-square:active {
+  z-index: 1;
+  background: #f1f5fa;
+  border-color: var(--ttt-accent);
+}
+
+.ttt-board-row:last-child .ttt-square {
+  border-bottom: none;
+}
+.ttt-board-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-square[style*="color: #ffb300"] {
+  /* Accent color for winning squares (override) */
+  color: var(--ttt-accent) !important;
+  border-color: var(--ttt-primary) !important;
+  background: #fffced;
+  z-index: 1;
+}
+
+.ttt-reset-row {
+  margin: 28px 0 4px 0;
+  display: flex;
+  justify-content: center;
+}
+.ttt-reset-btn {
+  background: var(--ttt-primary);
+  color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 1.03rem;
+  font-weight: bold;
+  padding: 12px 30px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.4px;
+  transition: background 0.16s;
+  box-shadow: 0 2px 8px 0 rgba(21,101,192,0.09);
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.ttt-reset-btn:hover, .ttt-reset-btn:focus {
+  background: #448aff;
+  color: #fff;
+  outline: none;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.ttt-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .ttt-main-container {
+    max-width: 98vw;
+    padding: 0 2vw 28px 2vw;
   }
-  to {
-    transform: rotate(360deg);
+  .ttt-title {
+    font-size: 1.35rem;
   }
-}
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+  .ttt-board {
+    max-width: 90vw;
+    border-radius: 10px;
+  }
+  .ttt-scoreboard {
+    font-size: .97rem;
+    padding: 5px 0;
+    border-radius: 8px;
   }
 }
